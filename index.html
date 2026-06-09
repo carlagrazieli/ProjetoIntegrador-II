@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plataforma para facilitar o reencontro de animais perdidos com seus tutores">
+  <title>Plataforma Animais Perdidos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    nav {
+      background: #34495e;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #27ae60;
+      outline: 2px solid #27ae60;
+      border-radius: 3px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #27ae60;
+      padding-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #27ae60;
+      box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #219150;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:focus {
+      outline: 2px solid #27ae60;
+      outline-offset: 2px;
+    }
+
+    .search-box {
+      margin-top: 40px;
+      padding: 25px;
+      background: #ecf0f1;
+      border-radius: 8px;
+      border-left: 4px solid #27ae60;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+
+      nav {
+        padding: 10px;
+      }
+    }
+
+    /* Acessibilidade */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🐾 Plataforma Animais Perdidos</h1>
+    <p>Facilitando o reencontro de animais com seus tutores</p>
+  </header>
+
+  <nav role="navigation" aria-label="Menu principal">
+    <a href="#inicio">Início</a>
+    <a href="#cadastro">Cadastrar Animal</a>
+    <a href="#buscar">Buscar Animal</a>
+    <a href="#ongs">ONGs Parceiras</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <main class="container">
+    <section class="form-section" id="cadastro">
+      <h2>Cadastro de Animal</h2>
+      <form method="POST" action="/api/animais" aria-labelledby="cadastro">
+        <div class="form-group">
+          <label for="nome">Nome do Animal <span aria-label="campo obrigatório">*</span></label>
+          <input type="text" id="nome" name="nome" placeholder="Ex: Rex" required aria-required="true">
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">Tipo <span aria-label="campo obrigatório">*</span></label>
+          <select id="tipo" name="tipo" required aria-required="true">
+            <option value="">Selecione uma opção</option>
+            <option value="cachorro">Cachorro</option>
+            <option value="gato">Gato</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="raca">Raça</label>
+          <input type="text" id="raca" name="raca" placeholder="Ex: Labrador">
+        </div>
+
+        <div class="form-group">
+          <label for="cor">Cor</label>
+          <input type="text" id="cor" name="cor" placeholder="Ex: Preto e Branco">
+        </div>
+
+        <div class="form-group">
+          <label for="local">Local onde foi visto/perdido <span aria-label="campo obrigatório">*</span></label>
+          <input type="text" id="local" name="local" placeholder="Ex: Bairro Centro, Uruguaiana" required aria-required="true">
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" placeholder="Informações adicionais..."></textarea>
+        </div>
+
+        <button type="submit">Cadastrar Animal</button>
+      </form>
+    </section>
+
+    <section class="search-box" id="buscar">
+      <h2>Buscar Animal</h2>
+      <form method="GET" action="/api/buscar" aria-labelledby="buscar">
+        <div class="form-group">
+          <label for="busca">Digite nome, raça ou local</label>
+          <input type="text" id="busca" name="busca" placeholder="Ex: Gato Siamês, Bairro Centro">
+        </div>
+        <button type="submit">Buscar</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
